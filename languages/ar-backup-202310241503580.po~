@@ -1,14 +1,14 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: i-monon\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 12:17+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"POT-Creation-Date: 2023-10-24 06:55+0000\n"
+"PO-Revision-Date: 2023-10-24 12:19+0000\n"
+"Last-Translator: eng sherif\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
+"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,11 +18,11 @@ msgstr ""
 
 #: functions/theme-hook.php:554
 msgid "An email with the generated password was sent!"
-msgstr ""
+msgstr "تم إرسال بريد إلكتروني بكلمة المرور التي تم إنشاؤها!"
 
 #: functions/nhc-form-fields/add-ad.php:48
 msgid "Cancel"
-msgstr ""
+msgstr "الغاء"
 
 #. Description of the theme
 msgid ""
@@ -30,14 +30,16 @@ msgid ""
 "Listing. This theme comes with all necessary features and pages for a "
 "Classified Listing website."
 msgstr ""
+"Classima هو نظيفة وحديثة وورد موضوع الانسب مصنفا. هذا الموضوع يأتي مع جميع "
+"الميزات الضرورية و صفحات تصنيف موقع الإدراج."
 
 #: functions/theme-hook.php:260 functions/theme-hook.php:262
 msgid "Email"
-msgstr ""
+msgstr "البريد الإلكتروني"
 
 #: functions/theme-hook.php:238
 msgid "full Name"
-msgstr ""
+msgstr "الاسم الكامل"
 
 #. URI of the theme
 msgid "http://radiustheme.com/demo/wordpress/classima"
@@ -52,26 +54,27 @@ msgstr ""
 msgid ""
 "I agree with your <a target=\"_blank\" href=\"%s\">Terms & Conditions</a>"
 msgstr ""
+"أوافق على <a target=\"_blank\" href=\"%s\">الشروط والأحكام</a> الخاصة بك"
 
 #. Name of the theme
 msgid "i-monon"
-msgstr ""
+msgstr "أنا monon"
 
 #: functions/theme-hook.php:459
 msgid "Invalid email address."
-msgstr ""
+msgstr "عنوان البريد الإلكتروني غير صالح."
 
 #: functions/theme-hook.php:441
 msgid "Invalid username (do not use special characters or spaces)!"
-msgstr ""
+msgstr "اسم المستخدم غير صالح (لا تستخدم أحرف خاصة أو مسافات)!"
 
 #. Name of the template
 msgid "Login Template"
-msgstr ""
+msgstr "قالب تسجيل الدخول"
 
 #: functions/theme-hook.php:437
 msgid "Minimum 3 characters required"
-msgstr ""
+msgstr "مطلوب 3 أحرف على الأقل"
 
 #: module/carbon-field/class-carbon-field.php:45
 msgid "Nafath Apikey"
@@ -79,35 +82,35 @@ msgstr ""
 
 #. Name of the template
 msgid "Nafathcallback Page"
-msgstr ""
+msgstr "Nafathcallback الصفحة"
 
 #: template/register.php:78
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 #: functions/theme-hook.php:469
 msgid "One of the password field is empty!"
-msgstr ""
+msgstr "أحد حقول كلمة المرور فارغ!"
 
 #: functions/theme-hook.php:276 functions/theme-hook.php:277
 msgid "Password"
-msgstr ""
+msgstr "كلمة السر"
 
 #: functions/theme-hook.php:474
 msgid "Passwords do not match"
-msgstr ""
+msgstr "كلمة المرور غير مطابقة"
 
 #: functions/theme-hook.php:267 functions/theme-hook.php:269
 msgid "Phone"
-msgstr ""
+msgstr "الهاتف"
 
 #: functions/theme-hook.php:416
 msgid "Please enter your Phone number"
-msgstr ""
+msgstr "يرجى إدخال رقم الهاتف الخاص بك"
 
 #. Author of the theme
 msgid "RadiusTheme"
-msgstr ""
+msgstr "RadiusTheme"
 
 #: module/carbon-field/class-carbon-field.php:25
 msgid "REGA"
@@ -115,39 +118,39 @@ msgstr ""
 
 #: functions/theme-hook.php:316
 msgid "Register"
-msgstr ""
+msgstr "تسجيل"
 
 #. Name of the template
 msgid "Register Template"
-msgstr ""
+msgstr "سجل قالب"
 
 #: functions/theme-hook.php:283 functions/theme-hook.php:285
 msgid "Retype Password"
-msgstr ""
+msgstr "اعد كتابة كلمة السر"
 
 #: functions/nhc-form-fields/add-ad.php:52
 msgid "Submit Property"
-msgstr ""
+msgstr "اضافة الاعلان"
 
 #: functions/theme-hook.php:449
 msgid "The email field is empty."
-msgstr ""
+msgstr "حقل البريد الإلكتروني فارغ."
 
 #: functions/theme-hook.php:433
 msgid "The username field is empty."
-msgstr ""
+msgstr "في حقل اسم المستخدم فارغ."
 
 #: functions/theme-hook.php:454
 msgid "This email address is already registered."
-msgstr ""
+msgstr "هذا البريد الالكتروني مسجل سابقا."
 
 #: functions/theme-hook.php:445
 msgid "This username is already registered."
-msgstr ""
+msgstr "وسجلت بالفعل اسم المستخدم هذا."
 
 #: functions/theme-hook.php:251 functions/theme-hook.php:253
 msgid "Username"
-msgstr ""
+msgstr "اسم المستخدم"
 
 #: module/carbon-field/class-carbon-field.php:27
 msgid "XIBM Client Id"
@@ -159,31 +162,31 @@ msgstr ""
 
 #: functions/theme-hook.php:406
 msgid "You need to agree with terms & conditions."
-msgstr ""
+msgstr "تحتاج إلى الموافقة على الشروط والأحكام."
 
 #: functions/theme-hook.php:549
 msgid "Your account was created and you can login now!"
-msgstr ""
+msgstr "تم إنشاء حسابك ويمكنك تسجيل الدخول الآن!"
 
 #: functions/theme-hook.php:299
 msgid "انتهاء الرخصة"
-msgstr ""
+msgstr "انتهاء الرخصة"
 
 #: functions/theme-hook.php:428
 msgid "تاريخ انتهاء الرخصة مطلوب"
-msgstr ""
+msgstr "تاريخ انتهاء الرخصة مطلوب"
 
 #: functions/theme-hook.php:243
 msgid "رقم الهوية"
-msgstr ""
+msgstr "الإعدادات الهوية"
 
 #: functions/theme-hook.php:292
 msgid "رقم رخصة ( فال )"
-msgstr ""
+msgstr "الإعدادات رخصة ( فال )"
 
 #: functions/theme-hook.php:423
 msgid "رقم رخصة الفال مطلوب"
-msgstr ""
+msgstr "الإعدادات رخصة الفال مطلوب"
 
 #: module/carbon-field/class-carbon-field.php:29
 msgid "عنوان نموذج اضافة الاعلان"
@@ -191,4 +194,4 @@ msgstr ""
 
 #: functions/theme-hook.php:245
 msgid "يرجي ادخال رقم الهوية"
-msgstr ""
+msgstr "يرجي دخول موقعنا مختص ادخال الإعدادات الهوية"

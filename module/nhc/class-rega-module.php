@@ -200,35 +200,35 @@ class RegaMoudle{
                      "propertyArea":3000,
                      "propertyPrice":300,
                      "numberOfRooms":0,
-                     "propertyType":"ارض",
+                     "propertyType":"أرض",
                      "propertyAge":"جديد",
                      "advertisementType":"إيجار",
                      "location":{
                         "region":"منطقة الحدود الشماليه",
                         "regionCode":"9",
-                        "city":"اعيوج لينه",
+                        "city":"طريف",
                         "cityCode":"901030",
-                        "district":"اعيوج لينه",
+                        "district":"العزيزية",
                         "districtCode":"901030",
                         "street":"dd",
                         "postalCode":"56456",
                         "buildingNumber":"5645",
                         "additionalNumber":"5555",
-                        "longitude":"24",
-                        "latitude":"24"
+                        "longitude":"42.666667",
+                        "latitude":"30.0"
                      },
-                     "propertyFace":null,
-                     "planNumber":null,
-                     "obligationsOnTheProperty":null,
+                     "propertyFace":"شرقية",
+                     "planNumber":"15468-5",
+                     "obligationsOnTheProperty":"لايوجد",
                      "guaranteesAndTheirDuration":null,
-                     "theBordersAndLengthsOfTheProperty":null,
+                     "theBordersAndLengthsOfTheProperty":"50x100 MQ",
                      "complianceWithTheSaudiBuildingCode":null,
                      "channels": [                       
                             "منصة مرخصة",
                             "لوحة اعلانية"  
                     ],
                     "propertyUsages": [                  
-                            "سكني"                   
+                            "زراعي"                   
                     ],
                     "propertyUtilities": [                     
                             "مياه"                    

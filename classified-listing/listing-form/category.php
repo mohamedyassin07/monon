@@ -11,8 +11,6 @@ use Rtcl\Helpers\Functions;
 use Rtcl\Helpers\Text;
 
 Functions::print_notices();
-?>
-<?php 
     if( get_option( '_aq_show_api' ) == 'yes' && get_current_user_id() === 2 ) {
         do_action('im_before_add_listing_condition');
     } else { 

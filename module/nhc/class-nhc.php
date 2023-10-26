@@ -10,7 +10,6 @@ class NHC {
         /* ---------------------- init_actions && init_includes --------------------- */
         $this->init_actions();
         $this->init_includes();
-        // PreDebug($this->get_cf_post_id( 'ارض' ) );
     }
     
     /**
@@ -151,6 +150,7 @@ class NHC {
 
         $response = $RegaMoudle->AdvertisementValidator($adLicenseNumber);
         $response = json_decode( $response );
+        
 
         if( $response->Body->result->isValid == true ){
             
@@ -224,9 +224,8 @@ class NHC {
         $RegaMoudle = new RegaMoudle();
 
         $response = $RegaMoudle->AdvertisementValidator( $adLicenseNumber );
-        // var_export($response);
         $response = json_decode( $response );
-        
+  
         if( $response->Header->Status->Code != 200  ) {  
             $msg = 'هنالك مشكلة في الاتصال مع هيئة العقار';
             if( isset($response->Body->error->message) ) {
@@ -358,6 +357,79 @@ class NHC {
             $meta['price'] = Functions::format_decimal( $data->propertyPrice );
         }
 
+       
+           
+        /* -------------------------------- locations ------------------------------- */
+        
+        $locatinos_cat = [];
+        // Add property state
+        if( isset( $data->location->region ) ) {
+            $property_state = $data->location->region;
+            $locatinos_cat[] = $property_state;
+            $state_id = get_term_by( 'name', $property_state, rtcl()->location );
+        }
+
+        $city_id = [];
+        // Add property city
+        if( isset( $data->location->city ) ) {
+            $property_city = $data->location->city;
+            $city_id = get_term_by( 'name', $property_city, rtcl()->location );
+            if (  is_object($city_id)  ) {
+                $city_id = $city_id->term_id;
+                wp_update_term(
+                    $city_id, // the term 
+                    rtcl()->location, // the taxonomy
+                    array(
+                    'parent'=> $state_id->term_id
+                    )
+                 );
+            } else {
+                $city_id = wp_insert_term(
+                    $property_city, // the term 
+                    rtcl()->location, // the taxonomy
+                    array(
+                    'parent'=> $state_id->term_id,
+                    )
+                 );
+            }
+           
+            $locatinos_cat[] = $property_city;
+            
+        }
+
+
+        $area_id = [];
+        // Add property area
+        if( isset( $data->location->district ) ) {
+            $area = sanitize_text_field( $data->location->district );
+            $area_id = get_term_by( 'name', $area, rtcl()->location );
+            
+            if ( is_object($area_id) ) {
+                $area_id = $area_id->term_id;
+                wp_update_term(
+                    $area_id, // the term 
+                    rtcl()->location, // the taxonomy
+                    array(
+                    'parent'=> $city_id
+                    )
+                 );
+            } else {
+            $area_id = wp_insert_term(
+                $area, // the term 
+                rtcl()->location, // the taxonomy
+                array(
+                'parent'=> $city_id
+                )
+             );
+            }
+   
+            $locatinos_cat[] = $area;
+            
+        }
+        
+        wp_set_object_terms( $prop_id, $locatinos_cat, rtcl()->location );
+
+
         $adress = 'المملكة العربية السعودية';
         // Address
         if( isset( $data->location->region ) || isset( $data->location->city ) ) {
@@ -378,7 +450,6 @@ class NHC {
             }
         }
 
-
         // lat & long
         if( ( isset($data->location->latitude) && !empty($data->location->latitude) ) && (  isset($data->location->longitude) && !empty($data->location->latitude)  ) ) {
                
@@ -398,16 +469,22 @@ class NHC {
             $meta['latitude'] = Functions::sanitize( $lat );
             $meta['longitude'] = Functions::sanitize( $lng );
         }
-        
-        if( isset( $data->advertisementType ) && ( $data->advertisementType != '' ) ) {
+       
+        if( isset( $data->advertisementType ) ) {
             $listing_type = '';
             foreach ( Functions::get_listing_types() as $key => $value) {
                 if( $value ===  $data->advertisementType ) {
                     $listing_type = $key;
                 }
             }
+            // Search for the key based on the form value
+            $_key = array_search( $data->advertisementType, self::adType_array());
+            if ($_key !== false) {
+                $listing_type  = $_key;
+            }
             $meta['ad_type'] = $listing_type;
         }
+        wp_set_object_terms( $prop_id, $data->propertyType, rtcl()->category );
 
         /* meta data */
         if ( ! empty( $meta ) && $prop_id ) {
@@ -416,6 +493,7 @@ class NHC {
             }
         }
 
+        
 
         // Custom Meta field
         $custom_filds_post = $this->get_cf_post_id( $data->propertyType );
@@ -426,6 +504,11 @@ class NHC {
                 if( $field_data['slug'] === 'adtype') {
                     $field_id = (int) $field_data['ID'];
                     $value = isset($data->advertisementType) ? $data->advertisementType : '';
+                    // Search for the key based on the form value
+                    $_key = array_search($value, self::adType_array());
+                    if ($_key !== false) {
+                        $value = $_key;
+                    }
                     if ( $field = rtcl()->factory->get_custom_field( $field_id ) ) {
                         $field->saveSanitizedValue( $prop_id, $value );
                     }
@@ -450,6 +533,11 @@ class NHC {
                 if( $field_data['slug'] === 'propertyface') {
                     $field_id = (int) $field_data['ID'];
                     $value = isset($data->propertyFace) ? $data->propertyFace : '';
+                    // Search for the key based on the form value
+                    $_key = array_search($value, self::PropertyFace_array());            
+                    if ($_key !== false) {
+                        $value = $_key;
+                    }
                     if ( $field = rtcl()->factory->get_custom_field( $field_id ) ) {
                         $field->saveSanitizedValue( $prop_id, $value );
                     }
@@ -474,6 +562,11 @@ class NHC {
                 if( $field_data['slug'] === 'propertyutilities') {
                     $field_id = (int) $field_data['ID'];
                     $value = !empty($data->propertyUtilities) ? $data->propertyUtilities[0] : '';
+                    // Search for the key based on the form value
+                    $_key = array_search($value, self::propertyUtilities_array());
+                    if ($_key !== false) {
+                        $value = $_key;
+                    }
                     if ( $field = rtcl()->factory->get_custom_field( $field_id ) ) {
                         $field->saveSanitizedValue( $prop_id, $value );
                     }
@@ -490,6 +583,11 @@ class NHC {
                 if( $field_data['slug'] === 'propertyusages') {
                     $field_id = (int) $field_data['ID'];
                     $value = !empty($data->propertyUsages) ? $data->propertyUsages[0] : '';
+                    // Search for the key based on the form value
+                    $_key = array_search($value, self::propertyUsages_array());
+                    if ($_key !== false) {
+                        $value = $_key;
+                    }
                     if ( $field = rtcl()->factory->get_custom_field( $field_id ) ) {
                         $field->saveSanitizedValue( $prop_id, $value );
                     }
@@ -508,7 +606,7 @@ class NHC {
     public static function get_cf_post_id( $propertyType )
     {
         $sup_category = [
-            'Land' => 'ارض',
+            'Land' => 'أرض',
             'Role' => 'دور',
             'Apartment' => 'شقة',
             'villa' => 'فيلا',
@@ -1131,7 +1229,7 @@ class NHC {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://nominatim.openstreetmap.org/search?email=admin@aqargate.com&format=json&q=' . $adress_search,
+        CURLOPT_URL => 'https://nominatim.openstreetmap.org/search?email=admin%40i-monon.com.sa&format=json&q=' . $adress_search,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1147,6 +1245,52 @@ class NHC {
 
         return $data;
 
+    }
+
+    public static function PropertyFace_array()
+    {
+        return [
+            'eastern'      => 'شرقية',
+            'western'      => 'غربية',
+            'north'        => 'شمالية',
+            'southern'     => 'جنوبية',
+            'northeast'    => 'شمالية شرقية',
+            'southeast'    => 'جنوبية شرقية',
+            'southwestern' => 'جنوبية غربية',
+            'northwest'    => 'شمالية غربية',
+            'threestreets' => 'ثلاثة شوارع',
+            'fourstreets'  => 'اربعة شوارع',
+        ] ;
+    }
+    public static function propertyUtilities_array()
+    {
+        return [
+            'electricity' => 'كهرباء',
+            'waters'      => 'مياه',
+            'sanitation'  => 'صرف صحي',
+        ] ;
+    }
+    public static function adType_array()
+    {
+        return [
+            'sale' => 'للبيع',
+            'rent' => 'إيجار',
+            'forinvestment' => 'للإستثمار',
+            'forrent' => 'للإيجار',
+            'forsale' => 'للبيع',
+            'tokiss' => 'للتقبيل',
+        ] ;
+    }
+    public static function propertyUsages_array()
+    {
+        return [
+            'agricultural' => 'زراعي',
+            'residential'  => 'سكني',
+            'commercial'   => 'تجاري',
+            'industrial'   => 'صناعي',
+            'healthy'      => 'صحي',
+            'educational'  => 'تعليمي',
+        ] ;
     }
 
 }

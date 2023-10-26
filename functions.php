@@ -13,7 +13,7 @@
 define('IM_DIR', __DIR__.'/');
 
 
-define( 'IMDEBUG', true );
+define( 'IMDEBUG', false );
 
 
 if( ! defined( 'IMSHOWERROR' ) ) {

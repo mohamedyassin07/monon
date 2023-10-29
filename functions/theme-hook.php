@@ -493,3 +493,38 @@ function im_registration() {
     wp_die();
 
 } 
+
+/* -------------------------------------------------------------------------- */
+/*                                csv_to_array                                */
+/* -------------------------------------------------------------------------- */
+if( ! function_exists('csv_to_array') ){    
+    /**
+     * csv_to_array
+     *
+     * @param  mixed $file
+     * @return void
+     */
+    function csv_to_array($file) {
+
+        if (($handle = fopen($file, 'r')) === false) {
+            die('Error opening file');
+        }
+        
+        $headers = fgetcsv($handle, 10000, ',');
+        $headers = preg_replace('/ ^[\pZ\p{Cc}\x{feff}]+|[\pZ\p{Cc}\x{feff}]+$/ux', '', $headers);
+        $_data = array();
+        
+        while ($row = fgetcsv($handle, 10000, ',')) {
+            $row = preg_replace('/ ^[\pZ\p{Cc}\x{feff}]+|[\pZ\p{Cc}\x{feff}]+$/ux', '', $row);
+            if (count($row) == count($headers)) {
+                $_data[] = array_combine($headers, $row);
+            }else{
+                $_data[] = array_merge($headers, $row);
+            }
+        }
+        fclose($handle);
+    
+        return $_data;
+      
+      }
+}

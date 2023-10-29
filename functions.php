@@ -50,6 +50,10 @@ function classima_child_theme_setup() {
 require_once ( IM_DIR . 'module/nafath/class-nafath-db.php' );
 require_once ( IM_DIR . 'module/nhc/class-nhc.php' );
 require_once ( IM_DIR . 'module/carbon-field/class-carbon-field.php' );
+require_once ( IM_DIR . 'module/metaboxes/metaboxes.php' );
+require_once ( IM_DIR . 'module/metaboxes/class-custom-column.php' );
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                       theme hook & function                                */
@@ -57,3 +61,21 @@ require_once ( IM_DIR . 'module/carbon-field/class-carbon-field.php' );
 require_once ( IM_DIR . 'functions/theme-hook.php' );
 require_once ( IM_DIR . 'functions/nafath-log.php' );
 
+
+/* -------------------------------------------------------------------------- */
+/*                             LOCATIONS                                      */
+/* -------------------------------------------------------------------------- */
+require_once ( IM_DIR . 'module/locations-data/class-location.php' );
+
+$Regions     = IM_DIR . 'module/locations-data/Regions.csv';
+$Cities      = IM_DIR . 'module/locations-data/Cities.csv';
+$Districts_1 = IM_DIR . 'module/locations-data/Districts-1.csv';
+$Districts_2 = IM_DIR . 'module/locations-data/Districts-2.csv';
+$Districts_3 = IM_DIR . 'module/locations-data/Districts-3.csv';
+
+
+define('REGIONS',   $Regions);
+define('CITIES',    $Cities);
+define('DISTRICTS1', $Districts_1);
+define('DISTRICTS2', $Districts_2);
+define('DISTRICTS3', $Districts_3);

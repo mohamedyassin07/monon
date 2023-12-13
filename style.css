@@ -5,7 +5,8 @@ Theme URI:      http://radiustheme.com/demo/wordpress/classima
 Author:         RadiusTheme
 Author URI:     https://www.radiustheme.com
 Description:    Classima is a clean and modern WordPress Theme best suited for Classified Listing. This theme comes with all necessary features and pages for a Classified Listing website.
-Version:        1.0
+Version:        2.3.1
+
 Text Domain:    classima
 Tags:           two-columns, three-columns, left-sidebar, right-sidebar, custom-colors, custom-menu, featured-images, footer-widgets, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, blog
 License:        Envato split License
@@ -73,7 +74,7 @@ input:focus {
     margin-top: 30px;
 }
 .user-info-form > div {
-    max-width: 80%;
+    /* max-width: 80%; */
     margin: 0 auto;
 }
 
@@ -86,17 +87,19 @@ input:focus {
 .user-info-form label {
     width: 100%;
     font-size: 1rem;
-    color: #adb5bd;
     transition: .2s;
     font-weight: 700;
 }
 .user-info-form input:not([type="checkbox"]) {
     width: 100%;
     height: 40px;
-    border-bottom: solid 1px #e9e9e9;
+    border: solid 1px #bebebe;
     font-size: 16px;
     margin-bottom: 20px;
     transition: .2s;
+    border-radius: 5px;
+    padding: 1rem;
+
 }
 
 
@@ -104,32 +107,45 @@ input:focus {
     color: #b2a263;
 }
 .user-info-form input.active {
-    border-bottom: solid 1px #b2a263;
+    border: solid 1px #b2a263;
 }
 
 .user-info-form button {
-    color: #fff !important;
-    padding: 0 30px;
-    height: 52px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background: #212121;
-    margin: 0 auto;
-    -webkit-transition: none;
-    transition: none;
-    border: none !important;
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.625rem 1.25rem;
+    transition: all .15s ease-in-out;
+    border: 0;
+    border-radius: 5px;
+    background-color: #b2a263;
+    color: #fafafa;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-shadow: 0 5px 10px 0 rgba(29,29,31,.09);
+    cursor: pointer;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #b2a263 !important;
+    border-color: #b2a263 !important;
 }
 
 .user-info-form button i {
-    font-size: 18px;
-    line-height: 1;
-    padding-left: 12px;
-    -webkit-transform: translateX(0%) rotate(0);
-    transform: translateX(0%) rotate(0);
 }
 
 .user-info-form button:hover,

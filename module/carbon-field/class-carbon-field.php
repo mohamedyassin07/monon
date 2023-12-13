@@ -82,6 +82,17 @@ class IM_CARBON_FIELD
             ->set_html( $area_btn_2 ),
             Field::make( 'html', 'crb_information_text_6')
             ->set_html( $area_btn_3 )
+        ) )
+        ->add_tab( __( 'Genral Settings' ), array(
+            Field::make( 'association', 'login_terms_condition', __( 'login terms condition' ) )
+            ->set_min( 1 )
+            ->set_max( 1 )
+            ->set_types( array(
+                array(
+                    'type'      => 'post',
+                    'post_type' => 'page',
+                )
+            ) )
         ) );
         // ->add_tab( __( 'اضافة داتا المناطق/الاحياء/المدن' ), array(
         //     Field::make( 'html', 'crb_information_text_0' )

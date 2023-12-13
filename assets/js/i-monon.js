@@ -203,11 +203,11 @@
         var selectedValue = $(this).val();
         
         // Check the selected value and update the label text accordingly
-        if (selectedValue === '1') {
-            $('#name-ipt').text('رقم الهوية الوطنية');
-        } else if (selectedValue === '2') {
-            $('#name-ipt').text(' رقم سجل المنشأة ');
-        }
+        // if (selectedValue === '1') {
+        //     $('#name-ipt').text('رقم الهوية الوطنية');
+        // } else if (selectedValue === '2') {
+        //     $('#name-ipt').text(' رقم سجل المنشأة ');
+        // }
     });
 
 

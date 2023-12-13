@@ -99,7 +99,7 @@ class NHC {
                         <p>لدي رقم ترخيص الاعلان</p>
                     </div>
                 </a>
-                <a href="#" class="addProperty_card">
+                <a href="#" class="addProperty_card" style="display: none;">
                     <img src="<?php echo trailingslashit( get_stylesheet_directory_uri() ) .'assets/img/add.png'; ?>" class="" loading="lazy" width="25" height="25">
                     <div class="addProperty_line"></div>
                     <div>
@@ -497,7 +497,7 @@ class NHC {
 
         // Custom Meta field
         $custom_filds_post = $this->get_cf_post_id( $data->propertyType );
-
+         
         if( !empty( $custom_filds_post ) ) { 
             foreach ( $custom_filds_post as $field_data ) {
                 
@@ -592,6 +592,25 @@ class NHC {
                         $field->saveSanitizedValue( $prop_id, $value );
                     }
                 }
+                
+                // رقم رخصة الاعلان
+                if( $field_data['slug'] === 'ad-license') {
+                    $field_id = (int) $field_data['ID'];
+                    $value = isset($data->adLicenseNumber) ? $data->adLicenseNumber : '';
+                    if ( $field = rtcl()->factory->get_custom_field( $field_id ) ) {
+                        $field->saveSanitizedValue( $prop_id, $value );
+                    }
+                }
+
+                if( $field_data['slug'] === 'brokerage-number') {
+                    $field_id = (int) $field_data['ID'];
+                    $value = isset($data->brokerageAndMarketingLicenseNumber) ? $data->brokerageAndMarketingLicenseNumber : '';
+                    if ( $field = rtcl()->factory->get_custom_field( $field_id ) ) {
+                        $field->saveSanitizedValue( $prop_id, $value );
+                    }
+                }
+
+                
             }
         }
 
@@ -612,7 +631,7 @@ class NHC {
             'villa' => 'فيلا',
             'SmallApartment' => 'شقَّة صغيرة (استوديو)',
             'Bedrooms' => 'غرفة',
-            'Break' => 'استراحة',
+            'Break' => 'إستراحة',
             'Complex' => 'مجمع',
             'Tower' => 'برج',
             'Exhibition' => 'معرض',
@@ -642,18 +661,24 @@ class NHC {
             $parent_title = $key;
         }
 
-        if( empty($parent_title) ) {
-            return array();
-        }
-        
-        // Get parent post ID based on the title
-        $parent_posts_query = new WP_Query(array(
+    
+        $args = [];
+        $args = [
             'post_type' => 'rtcl_cfg',
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'title' => $parent_title
-        ));
+        ];
 
+        $args['title'] = $parent_title;
+
+        // Get parent post ID based on the title
+        $parent_posts_query = new WP_Query( $args);
+
+        if( empty( $parent_posts_query->posts ) ) {
+            $args['title'] = 'Base';
+            $parent_posts_query = new WP_Query( $args);
+        }
+        
         $parent_post_id = 0;
 
         if ($parent_posts_query->have_posts()) {

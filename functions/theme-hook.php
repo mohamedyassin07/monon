@@ -7,13 +7,33 @@ add_action('wp_enqueue_scripts', 'im_enqueue_scripts');
 if( ! function_exists('im_enqueue_scripts') ){
     function im_enqueue_scripts()
     {
-        wp_enqueue_script( 'i_monon', trailingslashit( get_stylesheet_directory_uri() )  .'/assets/js/i-monon.js', array(), '', true );
+        wp_enqueue_script( 'i_monon', trailingslashit( get_stylesheet_directory_uri() )  .'/assets/js/i-monon.js', array(), rand(), true );
         $userID = get_current_user_id();
         $ajax_object = array(
             'ajaxurl' => admin_url( 'admin-ajax.php'),
             'userID'  => $userID,          
         );
         wp_localize_script( 'i_monon', 'im_ajax', $ajax_object );  
+        wp_enqueue_style( 'classipost-style', get_stylesheet_uri() );
+    }
+}
+add_action( 'im_add_custom_fields', 'im_add_custom_fields', 10, 1 );
+function im_add_custom_fields( $listing_id )
+{
+    $advertiserId = get_post_meta( $listing_id,'advertiserId', true );
+    $adLicenseNumber = get_post_meta($listing_id,'adLicenseNumber', true);
+    $deedNumber = get_post_meta($listing_id,'deedNumber', true);
+    if( !empty($advertiserId)  ) {
+        echo '<li><span class="rtin-label">رقم المعلن : </span>
+        <span class="rtin-title">' . $advertiserId . '</span></li>';
+    }
+    if(  !empty($adLicenseNumber)  ) {
+        echo '<li><span class="rtin-label">رقم رخصة الاعلان : </span>
+        <span class="rtin-title">' . $adLicenseNumber . '</span></li>';
+    }
+    if(  !empty($deedNumber) ) {
+        echo '<li><span class="rtin-label">الرقم المرجعي للاعلان : </span>
+        <span class="rtin-title">' . $deedNumber . '</span></li>';
     }
 }
 /* -------------------------------------------------------------------------- */
@@ -242,7 +262,7 @@ function im_register_form (){
             <label class="control control--checkbox">
                 <input name="term_condition" type="checkbox">
                 ' . sprintf( __( 'I agree with your <a target="_blank" href="%s">Terms & Conditions</a>', 'im' ), 
-                get_permalink(get_option('login_terms_condition') )) . '
+                    get_permalink( get_option('_login_terms_condition|||0|id') ) ) . '
                 <span class="control__indicator"></span>
             </label>
         </div><!-- form-tools --> ';
